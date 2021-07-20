@@ -13,7 +13,7 @@ app.secret_key='This is secret'
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'thieuquan501@gmail.com'
-app.config['MAIL_PASSWORD'] = 'flaskhotel'
+app.config['MAIL_PASSWORD'] = 'NEED TO CONFIG'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
