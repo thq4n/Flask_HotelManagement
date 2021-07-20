@@ -1,0 +1,132 @@
+{% extends 'account.html' %}
+
+{% block content %}
+<!-- /.preloader -->
+<div id="preloader"></div>
+<div id="top"></div>
+
+{% if message %}
+<script>
+    alert('{{message}}')
+</script>
+{% endif %}
+
+<!-- /.parallax full screen background image -->
+<div class="fullscreen landing parallax blog-page" style="background-image:url({{ url_for('static', filename='images/hotel/index-background.jpg') }});" data-img-width="2000" data-img-height="1333" data-diff="100">
+
+    <div class="overlay">
+        <div class="container">
+            <div class="col-md-10 col-md-offset-1 text-center">
+
+
+                <!-- /.main title -->
+                <h2 class="wow fadeInUp" style="margin-bottom: 50px; color: rgba(255, 255, 255, 0.7);">
+                    </br>
+                    Manager your account
+                </h2>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /.pricing section -->
+<div id="myaccount">
+    <div class="container">
+        <div class="text-center ">
+            <!-- /.pricing title -->
+            <h2 class="wow fadeInLeft">Welcome :  {{info.name}} </h2>
+            <div class="title-line wow fadeInRight"></div>
+        </div>
+        <div class="row account-details">
+
+            <!-- /.account-control -->
+            <div class="col-sm-3 account-control padding-b-50 padding-t-50">
+                <div class="panel panel-default sidebar-menu wow  fadeInLeft animated">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Control Menu</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="/booking">My bookings</a></li>
+                            <li class="active"><a>Change information</a></li>
+                            <li><a href="/changepass">Change password</a></li>
+                            <li><a href="/foodorder">Order food</a></li>
+                            <li><a href="/signout">Sign Out</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-9 account-data padding-b-50 padding-t-50">
+                <div id="tab2" class="box-old-booking box-section animated fadeInUp">
+                    <h2 style="padding-bottom: 17px;">Infomation</h2>
+
+                    <div class="text-center">
+                <h2 class="wow fadeInLeft">Edit</h2>
+                <div class="title-line wow fadeInRight"></div>
+            </div>
+            <div class="row register">
+
+                <form action="/editinfo/edit" method="post">
+                    <div class="form-group">
+                        <label for="name-login">Name</label>
+                        <input class="form-control" id="name-login" type="text" name="name" value="{{info.name}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="idcard-login">ID</label>
+                        <input class="form-control" id="idcard-login" type="text" name="idcard" value="{{info.ic}}"
+                               onchange="checkIdCard(this.value,'idcard-err-change','change-info-button')"
+                               maxlength="15"
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <p><b id="idcard-err-change" class="text-danger"></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-login">Email</label>
+                        <input class="form-control" id="email-login" type="email" name="email" value="{{info.email}}" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone-login">Phone</label>
+                        <input class="form-control" id="phone-login" type="text" name="phone" value="{{info.phone}}" maxlength="15" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address-login">Address</label>
+                        <input class="form-control" id="address-login" type="text" name="address" value="{{info.address}}" required>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="nation" id="nation-login" style="height:50px;" required>
+                            {% if info.nationality_id == 1 %}
+                            <option selected value="1">Vietnamese</option>
+                            <option value="2">Foreigner</option>
+                            {% else %}
+                            <option  value="1">Vietnamese</option>
+                            <option selected value="2">Foreigner</optionselected>
+                            {% endif %}
+                        </select>
+                    </div>
+                    <div class="form-group" >
+                        <label for="gender-login">Gender</label>
+                        <select class="form-control" name="gender" id="gender-login" style="height:50px;" required>
+                            {% if info.sex == 0 %}
+                            <option selected value="0">Male</option>
+                            <option value="1">Female</option>
+                            {% else %}
+                            <option  value="0">Male</option>
+                            <option selected value="1">Female</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                    <div class="text-center">
+                        <button id="change-info-button" type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Save</button>
+                    </div>
+                </form>
+            </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

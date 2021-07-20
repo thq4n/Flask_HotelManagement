@@ -1,0 +1,205 @@
+{% extends 'base/base.html' %}
+
+{% block nav %}
+<!-- NAVIGATION -->
+<div id="menu">
+    <nav class="navbar-wrapper navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-backyard">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div id="navbar-scroll-left" class="collapse navbar-collapse navbar-backyard navbar-left">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                </ul>
+            </div>
+            <div id="navbar-scroll-right" class="collapse navbar-collapse navbar-backyard navbar-right">
+                <ul class="nav navbar-nav">
+                    <li><a href="/myaccount">My account</a></li>
+                    <li><a href="/signout">Sign out</a></li>
+            </div>
+        </div>
+    </nav>
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- /.parallax full screen background image -->
+<div class="fullscreen landing parallax" style="background-image:url({{ url_for('static', filename='images/hotel/index-background.jpg') }})" data-img-width="2000" data-img-height="1333" data-diff="100">
+
+    <div class="overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+
+
+
+                    <!-- /.main title -->
+                    <h1 class="wow fadeInLeft">
+                        <span class="color">QTA</span> Hotel - The best hotel for you!
+                    </h1>
+
+                    <!-- /.header paragraph -->
+                    <div class="landing-text wow fadeInUp">
+                        <p>
+                            WELCOME TO OUR HOTEL! </br>
+                            We hope you will have the best choice
+                        </p>
+                    </div>
+                </div>
+
+                <!-- /.signup form -->
+                <div class="col-md-5">
+
+                    <div class="signup-header wow fadeInUp">
+                        <h3 class="form-title text-center "></br><strong>Find a room</strong></h3>
+                        <form class="form-header" action="booking-step-two.html"  method="POST" id="bookingForm">
+                            <div id="booking_control" class="booking_control">
+                                <div id="date_time_checkin" class="form-group">
+                                    <h3 class="m-0 p-0">Check in date:</h3>
+                                    <input class="form-control input-lg" name="pick_up_date_in" id="pick_up_date_in" type="date" required>
+                                </div>
+                                <div id="date_time_checkout" class="form-group">
+                                    <h3 class="m-0 p-0">Check out date:</h3>
+                                    <input class="form-control input-lg" name="pick_up_date_out" id="pick_up_date_out" type="date" required>
+                                </div>
+                                <div class="form-group last">
+                                    <a href="/bookroom"><input type="button" id="find_direction" class="btn btn-warning btn-block btn-lg" value="FIND!" onclick="checkdate()"></a>
+                                    <i class="load_icon pe-7s-refresh pe-spin directionLoad display_none"> </i>
+                                </div>
+                            </div>
+
+                            <div id="result_content" class="result_content display_none">
+                                <div class="">
+                                    <ul class="report">
+                                        <li><strong>Picking up   :</strong><b class="b-picking-up"></b></li>
+                                        <li><strong>Dropping off :</strong><b class="b-dropping-off"></b></li>
+                                        <li><strong>Date / Time  : </strong><b class="b-time"></b></li>
+                                        <li><strong>Distance     : </strong><b class="b-distance"></b></li>
+                                        <li class="hr"></li>
+                                        <li><strong>Price HT     : </strong><b class="b-price-ht"></b></li>
+                                        <li><strong>Price TVA    : </strong><b class="b-price-tva"></b></li>
+                                        <li><strong>Price TTC    : </strong><b class="b-price-ttc"></b></li>
+                                    </ul>
+                                </div>
+                                <div class="">
+                                    <div class="col-lg-6">
+                                        <div class="form-group last">
+                                            <input id="show_map" type="button" class="btn btn-warning btn-block btn-lg" value="Show the map">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group last">
+                                            <input  id="next_step"  type="button" class="btn btn-warning btn-block btn-lg" value="Next ">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="map_div display_none">
+                                <a class="close_map"><i class="pe-7s-close"></i></a>
+                                <div id="map_canvas" class="map_div"></div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- /.Cars section -->
+<div id="carssection">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="wow fadeInLeft">SEE OUR ROOMS</h2>
+            <div class="title-line wow fadeInRight"></div>
+        </div>
+        <div class="row carssections">
+
+            <div id="carssections" class="owl-carousel">
+            {% for r in rooms %}
+            {% if r.id % 2 == 0 %}
+            <div class="screen wow fadeInUp" data-path-hover="m 180,34.57627 -180,0 L 0,0 180,0 z">
+            {% else %}
+            <div class="screen wow fadeInDown" data-path-hover="m 180,34.57627 -180,0 L 0,0 180,0 z">
+            {% endif %}
+                <figure>
+
+                    <img src="{{url_for('static', filename = r.image)}}" />
+                    <svg viewBox="0 0 180 320" preserveAspectRatio="none"><path d="M 180,160 0,218 0,0 180,0 z"/></svg>
+                    <figcaption>
+                        <div class="overflow">
+                            <h2>{{r.name}}</h2>
+                            <p>Max passanger : {{r.amount}}</p>
+                        </div>
+                        <div class="car-price-content">
+                            <b class="overflow car-price" style="font-size: 3em;">{{r.price}} </b>
+                            <b class="overflow car-price" style="font-size: 1em;">VND</b><br>
+                            <del class="overflow del-car-price" style="font-size: 2em;">{%set price = (r.price * 1.1) | int() %}{{price}}</del>
+                            <b class="overflow car-price" style="font-size: 1em; color: white">VND</b><br>
+                        </div>
+                        <div class="car-details">
+                            <div class="">
+                                <ul class="checklist">
+                                    <li><i class="fa fa-check"></i>Pay at place or pay today</li>
+                                </ul>
+                            </div>
+
+                            <button  class="btn-primary booking-btn" style="color: grey"><strong>BOOKING</strong></button>
+
+                        </div>
+                    </figcaption>
+                </figure>
+            </div>
+            {% endfor %}
+                <!--<div class="screen wow fadeInUp" data-path-hover="m 180,34.57627 -180,0 L 0,0 180,0 z">
+                    <figure>
+                        <img src="{{url_for('static', filename = 'images/car2.png')}}" />
+                        <svg viewBox="0 0 180 320" preserveAspectRatio="none"><path d="M 180,160 0,218 0,0 180,0 z"/></svg>
+                        <figcaption>
+                            <div class="overflow">
+                                <h2>Mercidce Benz</h2>
+                                <p>Max passanger : 1</p>
+                            </div>
+                            <div class="car-price-content">
+                                <b class="overflow car-price">29</b><b class="price-currency">$</b><br>
+                                <del class="overflow del-car-price">39</del><del class="del-price-currency">$</del>
+                            </div>
+                            <div class="car-details">
+                                <div class="">
+                                    <ul class="car-features">
+                                        <li><i class="fa fa-briefcase" data-tooltip=""></i></li>
+                                        <li><i class="fa fa-asterisk" data-tooltip=""></i></li>
+                                        <li><i class="fa fa-rss" data-tooltip=""></i></li>
+                                        <li><i class="fa fa-certificate" data-tooltip=""></i></li>
+                                        <li><i class="fa fa-flash" data-tooltip=""></i></li>
+                                        <li><i class="fa fa-music" data-tooltip=""></i></li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="">
+                                    <ul class="checklist">
+                                        <li><i class="fa fa-check"></i>Pay at place or pay today</li>
+                                        <li><i class="fa fa-check"></i>Pay at place or pay today</li>
+                                    </ul>
+                                </div>
+
+                                <button  class="btn-primary booking-btn">BOOKING</button>
+
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
