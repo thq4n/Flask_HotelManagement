@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="{{url_for('static', filename = 'images/icons/favicon.ico')}}" type="image/gif" sizes="16x16">
+    <!-- /.website title -->
+    <title>QTA Hotel | Home page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="UTF-8" />
+    <!-- CSS Files -->
+    <link href="{{url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet" media="screen">
+    <link href="{{url_for('static', filename = 'css/font-awesome.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename = 'fonts/icon-7-stroke/css/pe-icon-7-stroke.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename = 'fonts/icon-7-stroke/css/helper.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename = 'css/animate.css')}}" rel="stylesheet" media="screen">
+    <link href="{{url_for('static', filename = 'css/owl.theme.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename = 'css/owl.carousel.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename = 'css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="/your-path-to-fontawesome/css/brands.css" rel="stylesheet">
+    <link href="/your-path-to-fontawesome/css/solid.css" rel="stylesheet">
+
+    <!-- Colors -->
+    <!-- <link href="css/css-index-blue.css" rel="stylesheet" media="screen"> -->
+    <!-- <link href="css/css-index-green.css" rel="stylesheet" media="screen"> -->
+    <!-- <link href="css/css-index-purple.css" rel="stylesheet" media="screen"> -->
+    <!-- <link href="css/css-index-red.css" rel="stylesheet" media="screen"> -->
+    <!-- <link href="css/css-index-orange.css" rel="stylesheet" media="screen"> -->
+    <link href="{{url_for('static', filename = 'css/css-index-yellow.css')}}" rel="stylesheet" media="screen">
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" />
+
+    <!-- /.javascript files -->
+    <script src="{{url_for('static', filename = 'js/jquery.js')}}"></script>
+    <script src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename = 'js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script src="{{url_for('static', filename = 'js/custom.js')}}"></script>
+    <script src="{{url_for('static', filename = 'js/jquery.sticky.js')}}"></script>
+    <script src="{{url_for('static', filename = 'js/wow.min.js')}}"></script>
+    <script src="{{url_for('static', filename = 'js/owl.carousel.min.js')}}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script src="{{url_for('static', filename = 'js/google.js')}}"></script>
+    <script src="{{url_for('static', filename = 'js/booking.js')}}"></script>
+    <script src="{{url_for('static', filename = 'js/bootstrap-hover-dropdown.js')}}"></script>
+    <script src="{{url_for('static', filename = 'js/jquery.validate.min.js')}}"></script>
+
+    <script src="{{url_for('static', filename = 'js/snap.svg-min.js')}}"></script>
+    <script src="{{url_for('static', filename = 'js/hovers.js')}}"></script>
+    <script src="{{url_for('static', filename = 'js/main.js')}}"></script>
+
+
+    <script>
+                                            new WOW().init();
+                                            $('#date_time').datetimepicker({
+                                                format: 'dd/MM/yyyy hh:mm:ss',
+                                                language: 'en-US',
+                                                pickDate: true, // disables the date picker
+                                                pickTime: true
+                                            });
+    </script>
+
+    <script>
+        (function () {
+            function init() {
+                var speed = 250,
+                        easing = mina.easeinout;
+                [].slice.call(document.querySelectorAll('#carssections > div')).forEach(function (el) {
+                    var s = Snap(el.querySelector('svg')), path = s.select('path'),
+                            pathConfig = {
+                                from: path.attr('d'),
+                                to: el.getAttribute('data-path-hover')
+                            };
+
+                    el.addEventListener('mouseenter', function () {
+                        path.animate({'path': pathConfig.to}, speed, easing);
+                    });
+
+                    el.addEventListener('mouseleave', function () {
+                        path.animate({'path': pathConfig.from}, speed, easing);
+                    });
+                });
+            }
+            init();
+        })();
+    </script>
+</head>
+<body>
+    {%block nav%}
+        {%include 'base/nav.html'%}
+    {%endblock%}
+
+    <header>
+    {%block header%}
+        {%include 'base/header.html'%}
+    {%endblock%}
+    </header>
+
+    {%block content%}
+
+    {%endblock%}
+
+    <footer>
+    {%block footer%}
+        {%include 'base/footer.html'%}
+    {%endblock%}
+    </footer>
+</body>
+</html>

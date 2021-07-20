@@ -1,0 +1,102 @@
+{% extends 'account.html' %}
+
+{% block content %}
+<!-- /.preloader -->
+<div id="preloader"></div>
+<div id="top"></div>
+
+{% if message == 'Successful' %}
+<script>
+    alert('{{message}}')
+</script>
+{% endif %}
+
+<!-- /.parallax full screen background image -->
+<div class="fullscreen landing parallax blog-page" style="background-image:url({{ url_for('static', filename='images/hotel/index-background.jpg') }});" data-img-width="2000" data-img-height="1333" data-diff="100">
+
+    <div class="overlay">
+        <div class="container">
+            <div class="col-md-10 col-md-offset-1 text-center">
+
+
+                <!-- /.main title -->
+                <h2 class="wow fadeInUp" style="margin-bottom: 50px; color: rgba(255, 255, 255, 0.7);">
+                    </br>
+                    Manager your account
+                </h2>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /.pricing section -->
+<div id="myaccount">
+    <div class="container">
+        <div class="text-center ">
+            <!-- /.pricing title -->
+            <h2 class="wow fadeInLeft">Welcome :  {{info.name}} </h2>
+            <div class="title-line wow fadeInRight"></div>
+        </div>
+        <div class="row account-details">
+
+            <!-- /.account-control -->
+            <div class="col-sm-3 account-control padding-b-50 padding-t-50">
+                <div class="panel panel-default sidebar-menu wow  fadeInLeft animated">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Control Menu</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="/booking">My bookings</a></li>
+                            <li><a href="/editinfo">Change information</a></li>
+                            <li class="active"><a>Change password</a></li>
+                            <li><a href="/foodorder">Order food</a></li>
+                            <li><a href="/signout">Sign Out</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-9 account-data padding-b-50 padding-t-50">
+                <div id="tab2" class="box-old-booking box-section animated fadeInUp">
+                    <h2 style="padding-bottom: 17px;">Change Password</h2>
+
+                    <div class="text-center">
+                <h2 class="wow fadeInLeft">Edit</h2>
+                <div class="title-line wow fadeInRight"></div>
+            </div>
+            <div class="row register">
+
+                <form action="/changepass/save" method="post">
+                    <div class="form-group">
+                        <label for="old_password-login">Old Password</label>
+                        <input class="form-control" id="old_password-login" name="oldpass" type="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password-change">New Password</label>
+                        <input class="form-control" id="new-password-change" type="password" name="newpass"
+                               onchange="checkSamePass('new-password-change','again-password-change','password-err-change','pass-button-change')"
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label for="again-password-change">New Password Again</label>
+                        <input class="form-control" id="again-password-change" type="password" name="newpassagain"
+                               onchange="checkSamePass('new-password-change','again-password-change','password-err-change','pass-button-change')"
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <p><b id="password-err-change" class="text-danger"></b></p>
+                    </div>
+                    <div class="text-center">
+                        <button id="pass-button-change" type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Save</button>
+                    </div>
+                </form>
+            </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

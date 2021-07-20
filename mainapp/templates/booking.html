@@ -1,0 +1,108 @@
+{% extends 'account.html' %}
+
+{% block content %}
+<!-- /.preloader -->
+<div id="preloader"></div>
+<div id="top"></div>
+
+<!-- /.parallax full screen background image -->
+<div class="fullscreen landing parallax blog-page" style="background-image:url({{ url_for('static', filename='images/hotel/index-background.jpg') }});" data-img-width="2000" data-img-height="1333" data-diff="100">
+
+    <div class="overlay">
+        <div class="container">
+            <div class="col-md-10 col-md-offset-1 text-center">
+
+
+                <!-- /.main title -->
+                <h2 class="wow fadeInUp" style="margin-bottom: 50px; color: rgba(255, 255, 255, 0.7);">
+                    </br>
+                    Manager your account
+                </h2>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /.pricing section -->
+<div id="myaccount">
+    <div class="container">
+        <div class="text-center ">
+            <!-- /.pricing title -->
+            <h2 class="wow fadeInLeft">Welcome :  {{info.name}} </h2>
+            <div class="title-line wow fadeInRight"></div>
+        </div>
+        <div class="row account-details">
+
+            <!-- /.account-control -->
+            <div class="col-sm-3 account-control padding-b-50 padding-t-50">
+                <div class="panel panel-default sidebar-menu wow  fadeInLeft animated">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Control Menu</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="active"><a>My bookings</a></li>
+                            <li><a href="/editinfo">Change information</a></li>
+                            <li><a href="/changepass">Change password</a></li>
+                            <li><a href="/foodorder">Order food</a></li>
+                            <li><a href="/signout">Sign Out</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-9 account-data padding-b-50 padding-t-50">
+                <div id="tab2" class="box-old-booking box-section animated fadeInUp">
+                    <h2 style="padding-bottom: 17px;">My bookings</h2>
+
+                    <table id="mybooking-list" class="table booking-list stacktable large-only table-hover table-striped">
+                        <tbody>
+                            <tr>
+                                <th>Room ID</th>
+                                <th>Check in</th>
+                                <th>Check out</th>
+                                <th>Price</th>
+                                <th>Room Type</th>
+                                <th>Status</th>
+                                <th>Room Name</th>
+                                <th></th>
+                            </tr>
+                            {% for b in bookings %}
+                            <tr id="booking{{b.id}}">
+                                <td>{{b.room_id}}</td>
+                                <td>{{b.check_in}}</td>
+                                <td>{{b.check_out}}</td>
+                                {% for r in rooms %}
+                                {% if b.room_id == r.id %}
+                                {% for t in room_types %}
+                                {% if r.roomtype_id == t.id %}
+                                <td>{{t.price}}</td>
+                                <td>{{t.name}}</td>
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                                {% endfor %}
+                                <td><strong class="status-orange">{{b.status}}</strong></td>
+                                <td>{{b.room}}</td>
+                                {% if b.status_id == 1 %}
+                                <td class="center">
+                                    <button class="btn btn-danger"
+                                            onclick="cancleBooking({{b.id}})"><i class="fa fa-trash"></i></button>
+                                </td>
+                                {% else %}
+                                <td class="center">
+
+                                </td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
